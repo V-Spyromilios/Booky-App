@@ -18,6 +18,8 @@
 		EF355A0728D08C8200A012C9 /* DetailedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF355A0628D08C8200A012C9 /* DetailedView.swift */; };
 		EF355A0928D08C9F00A012C9 /* AddBookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF355A0828D08C9F00A012C9 /* AddBookView.swift */; };
 		EF355A0B28D08CC100A012C9 /* BookImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF355A0A28D08CC100A012C9 /* BookImageView.swift */; };
+		EFEDDF0928D9DBC100CB5C10 /* DiskOps.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFEDDF0828D9DBC100CB5C10 /* DiskOps.swift */; };
+		EFEDDF0C28D9F5B600CB5C10 /* loadBook.json in Sources */ = {isa = PBXBuildFile; fileRef = EFEDDF0B28D9F5B600CB5C10 /* loadBook.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +35,8 @@
 		EF355A0628D08C8200A012C9 /* DetailedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedView.swift; sourceTree = "<group>"; };
 		EF355A0828D08C9F00A012C9 /* AddBookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBookView.swift; sourceTree = "<group>"; };
 		EF355A0A28D08CC100A012C9 /* BookImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookImageView.swift; sourceTree = "<group>"; };
+		EFEDDF0828D9DBC100CB5C10 /* DiskOps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiskOps.swift; sourceTree = "<group>"; };
+		EFEDDF0B28D9F5B600CB5C10 /* loadBook.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = loadBook.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,13 +69,12 @@
 		EF3559EC28D08A8300A012C9 /* Booky */ = {
 			isa = PBXGroup;
 			children = (
+				EFEDDF0A28D9F50000CB5C10 /* Resources */,
 				EF3559ED28D08A8300A012C9 /* BookyApp.swift */,
 				EF355A0128D08B5300A012C9 /* Views */,
 				EF3559F128D08A8300A012C9 /* Assets.xcassets */,
 				EF3559F328D08A8300A012C9 /* Preview Content */,
-				EF3559FB28D08ACC00A012C9 /* Library.swift */,
-				EF3559FD28D08B0800A012C9 /* BookModel.swift */,
-				EF3559FF28D08B2D00A012C9 /* PHPicker.swift */,
+				EFEDDF0728D9DB4C00CB5C10 /* Models */,
 			);
 			path = Booky;
 			sourceTree = "<group>";
@@ -94,6 +97,25 @@
 				EF355A0A28D08CC100A012C9 /* BookImageView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		EFEDDF0728D9DB4C00CB5C10 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				EF3559FB28D08ACC00A012C9 /* Library.swift */,
+				EF3559FD28D08B0800A012C9 /* BookModel.swift */,
+				EF3559FF28D08B2D00A012C9 /* PHPicker.swift */,
+				EFEDDF0828D9DBC100CB5C10 /* DiskOps.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		EFEDDF0A28D9F50000CB5C10 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				EFEDDF0B28D9F5B600CB5C10 /* loadBook.json */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -167,12 +189,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				EF3559F028D08A8300A012C9 /* ContentView.swift in Sources */,
+				EFEDDF0928D9DBC100CB5C10 /* DiskOps.swift in Sources */,
 				EF3559EE28D08A8300A012C9 /* BookyApp.swift in Sources */,
 				EF3559FE28D08B0800A012C9 /* BookModel.swift in Sources */,
 				EF355A0928D08C9F00A012C9 /* AddBookView.swift in Sources */,
 				EF3559FC28D08ACC00A012C9 /* Library.swift in Sources */,
 				EF355A0728D08C8200A012C9 /* DetailedView.swift in Sources */,
 				EF355A0028D08B2D00A012C9 /* PHPicker.swift in Sources */,
+				EFEDDF0C28D9F5B600CB5C10 /* loadBook.json in Sources */,
 				EF355A0B28D08CC100A012C9 /* BookImageView.swift in Sources */,
 				EF355A0328D08C3C00A012C9 /* BookViews.swift in Sources */,
 			);

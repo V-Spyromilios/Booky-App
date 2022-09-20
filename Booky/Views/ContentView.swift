@@ -34,7 +34,7 @@ var body: some View {
 			.listStyle(.insetGrouped)
 			.toolbar(content: EditButton.init)
 		}.navigationViewStyle(StackNavigationViewStyle()) //!
-	}
+		}
 }
 
 private struct BookRowView: View {
@@ -116,7 +116,8 @@ static var previews: some View {
 		.previewAllColorSchemes
 		.previewInterfaceOrientation(.portrait)
 	
-		ContentView().environmentObject(Library())
+		ContentView()
+		.environmentObject(Library())
 		.previewInterfaceOrientation(.landscapeLeft)
 	}
 }

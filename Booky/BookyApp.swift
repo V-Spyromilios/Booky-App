@@ -9,9 +9,10 @@ import SwiftUI
 
 @main
 struct BookyApp: App {
-    var body: some Scene {
-        WindowGroup {
+	var body: some Scene {
+		WindowGroup {
 			ContentView().environmentObject(Library())
-        }
-    }
+		}
+	}
 }
+	

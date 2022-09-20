@@ -61,10 +61,9 @@ var body: some View {
 
 struct DetailedView_Previews: PreviewProvider {
 	static var previews: some View {
-		DetailedView(book: .init())
-			.environmentObject(Library())
-			.previewAllColorSchemes
-			.previewInterfaceOrientation(.landscapeLeft)
-			
+			DetailedView(book: .init())
+				.environmentObject(Library())
+				.previewAllColorSchemes
+				.previewInterfaceOrientation(.landscapeLeft)
 	}
 }
