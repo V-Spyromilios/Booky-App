@@ -12,29 +12,30 @@ struct ContentView: View {
 @State var addingNewBook: Bool = false
 
 var body: some View {
-		NavigationView {
-			List {
-				Button {
-				  addingNewBook = true
-				} label: {
-				  Spacer()
-				  VStack(spacing: 6) {
+	NavigationView {
+		List {
+			Button {
+				addingNewBook = true
+			} label: {
+				Spacer()
+				VStack(spacing: 6) {
 					Image(systemName: "books.vertical")
-					  .font(.system(size: 60))
+						.font(.system(size: 60))
 					Text("Add New Book")
-					  .font(.title2)
-				  }
-					Spacer()
+						.font(.title2)
 				}
-				.buttonStyle(.borderless)
-				.padding(.vertical, 8)
-				.sheet(isPresented: $addingNewBook) { AddBookView() }
-				ForEach(Section.allCases, id: \.self) { SectionView(section: $0) }
-			}.navigationTitle("Kleistrasse Library")
-			.listStyle(.insetGrouped)
-			.toolbar(content: EditButton.init)
-		}.navigationViewStyle(StackNavigationViewStyle()) //!
-		}
+				Spacer()
+			}
+			.buttonStyle(.borderless)
+			.padding(.vertical, 8)
+			.sheet(isPresented: $addingNewBook) { AddBookView() }
+			ForEach(Section.allCases, id: \.self) { SectionView(section: $0) }
+		}.navigationTitle("Kleistrasse Library")
+		.listStyle(.insetGrouped)
+		.toolbar { EditButton() }
+	}.navigationViewStyle(StackNavigationViewStyle()) //!
+		.onAppear { loadJSON() }
+}
 }
 
 private struct BookRowView: View {

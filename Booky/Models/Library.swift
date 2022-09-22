@@ -93,7 +93,7 @@ public	init() {
 	}
 
 ///in-memory cache of the manualy shorted books
-@Published private var booksCache: [Book] = [
+@Published var booksCache: [Book] = [
 //	.init(title: "Working with SwiftUI", author: "Prince of BellAir", date: Date()),
 //	.init(title: "Zero to One", author: "Peter Thiel", date: Date()),
 //	.init(title: "LiftOff", author: "Eric Berger", date: Date()),
