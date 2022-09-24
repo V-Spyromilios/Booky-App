@@ -34,7 +34,6 @@ var body: some View {
 		.listStyle(.insetGrouped)
 		.toolbar { EditButton() }
 	}.navigationViewStyle(StackNavigationViewStyle()) //!
-		.onAppear { loadJSON() }
 }
 }
 

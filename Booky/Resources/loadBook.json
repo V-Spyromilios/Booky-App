@@ -1,17 +1,17 @@
 {
-	"booksCache"[
+	"booksCache": [
 		{
-			"title": "SpaceX The Early years"
-			"author": "Evangelos Spyromilios"
-			"review": "What a story.."
-			"readMe": true
+			"title": "SpaceX The Early years",
+			"author": "Evangelos Spyromilios",
+			"review": "What a story..",
+			"readMe": true,
 			"date": 685374577
 		},
 		{
-			"title": "1970s"
-			"author": "Evangelos Spyromilios"
-			"review": "What a book.."
-			"readMe": false
+			"title": "1970s",
+			"author": "Evangelos Spyromilios",
+			"review": "What a book..",
+			"readMe": false,
 			"date": 685374517
 		}
 	]

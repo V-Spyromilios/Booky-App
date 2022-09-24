@@ -18,6 +18,7 @@
 		EF355A0728D08C8200A012C9 /* DetailedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF355A0628D08C8200A012C9 /* DetailedView.swift */; };
 		EF355A0928D08C9F00A012C9 /* AddBookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF355A0828D08C9F00A012C9 /* AddBookView.swift */; };
 		EF355A0B28D08CC100A012C9 /* BookImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF355A0A28D08CC100A012C9 /* BookImageView.swift */; };
+		EF5D1BCE28DEF0BD00D714C1 /* loadBook.json in Resources */ = {isa = PBXBuildFile; fileRef = EFEDDF0B28D9F5B600CB5C10 /* loadBook.json */; };
 		EFEDDF0928D9DBC100CB5C10 /* DiskOps.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFEDDF0828D9DBC100CB5C10 /* DiskOps.swift */; };
 		EFEDDF0C28D9F5B600CB5C10 /* loadBook.json in Sources */ = {isa = PBXBuildFile; fileRef = EFEDDF0B28D9F5B600CB5C10 /* loadBook.json */; };
 /* End PBXBuildFile section */
@@ -176,6 +177,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EF5D1BCE28DEF0BD00D714C1 /* loadBook.json in Resources */,
 				EF3559F528D08A8300A012C9 /* Preview Assets.xcassets in Resources */,
 				EF3559F228D08A8300A012C9 /* Assets.xcassets in Resources */,
 			);

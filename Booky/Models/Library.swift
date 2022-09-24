@@ -89,7 +89,7 @@ class Library: ObservableObject {
 	}
 	
 public	init() {
-		loadJSON()
+	self.booksCache = loadJSON()
 	}
 
 ///in-memory cache of the manualy shorted books
