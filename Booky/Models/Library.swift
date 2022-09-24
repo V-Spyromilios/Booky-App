@@ -89,10 +89,10 @@ class Library: ObservableObject {
 	}
 	
 public	init() {
-	self.booksCache = loadJSON()
+	self.booksCache = loadJSON() ?? [Book.init()]
 	}
 
-///in-memory cache of the manualy shorted books
+///in-memory cache of the manualy shorted book
 @Published var booksCache: [Book] = [
 //	.init(title: "Working with SwiftUI", author: "Prince of BellAir", date: Date()),
 //	.init(title: "Zero to One", author: "Peter Thiel", date: Date()),

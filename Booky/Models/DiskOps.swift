@@ -7,11 +7,11 @@
 
 import Foundation
 
-func loadJSON()-> [Book] {
+func loadJSON()-> [Book]? {
 	guard let loadBookURL = Bundle.main.url(forResource: "loadBook", withExtension: "json")
 	else {
 		print("FUCKED UP")
-		return Library().booksCache
+		return nil
 	}
 
 	let decoder = JSONDecoder()
@@ -21,4 +21,4 @@ func loadJSON()-> [Book] {
 		print(loadBook.booksCache[0].author)
 		return loadBook.booksCache
 		} catch let error { print(error.localizedDescription) }
-	return Library().booksCache }
+	return nil }
