@@ -15,6 +15,8 @@ enum Section: CaseIterable, Codable {
 
 
 class Library: ObservableObject {
+	let JSONURL = URL(fileURLWithPath: "loadJSON",
+						   relativeTo: FileManager.documentsDirectoryURL).appendingPathExtension("json")
 	var sortedBooks: [Section: [Book]] {
 		get {
 			let groupedBooks = Dictionary(grouping: booksCache, by: \.readMe)
@@ -32,7 +34,6 @@ class Library: ObservableObject {
 	/// Adds a new book at the start of the booksCache
 	func addNewBook(book: Book, image: Image?) {
 		booksCache.insert(book, at: 0)
-		//self.saveBooksCacheJSON()
 		images[book] = image
 		sortBooks()
 	}
@@ -47,20 +48,7 @@ class Library: ObservableObject {
 			sortBooks()
 		} else { return }
 	}
-	
-	// /// Alternative func to deleteBook :
-	//	func delBook(atoffSets offsets: IndexSet, section: Section) {
-	//		let booksBeforeDeletion = booksCache
-	//
-	//		sortedBooks[section]?.remove(atOffsets: offsets)
-	//
-	//		for change in booksCache.difference(from: booksBeforeDeletion) {
-	//			if case .remove(_, let deletedBook, _) = change {
-	//				images[deletedBook] = nil
-	//			}
-	//		}
-	//	}
-	
+
 	//TODO: Add description
 	func sortBooks() {
 		booksCache = sortedBooks
@@ -69,7 +57,7 @@ class Library: ObservableObject {
 			.sorted(by: <)
 		objectWillChange.send()
 	}
-	
+
 	///move book from oldOffSets: IndexSet to newOffset: Int, withing the given section: Section
 	func moveBook(oldOffSets: IndexSet, newOffset: Int, section: Section) {
 		sortedBooks[section]?.move(fromOffsets: oldOffSets, toOffset: newOffset)
@@ -88,7 +76,7 @@ class Library: ObservableObject {
 	}
 
 	public	init() {
-		self.booksCache = loadBooksCacheJSON() ?? [Book.init()]
+		loadBooksCacheJSON()
 	}
 
 	///in-memory cache of the manualy shorted book
@@ -119,45 +107,28 @@ class Library: ObservableObject {
 	@Published var images: [Book: Image] = [:]
 
 	func saveBooksCacheJSON() {
-		guard let loadBookURL = Bundle.main.url(forResource: "loadBook", withExtension: "json")
-			else {
-				print("FUCKED UP")
-				return
-			}
 		let encoder = JSONEncoder()
+		encoder.outputFormatting = .prettyPrinted
 
 		do {
-			let jsData = try encoder.encode(self.booksCache)
+			let jsData = try encoder.encode(booksCache)
 //			let ioURL = URL(fileURLWithPath: "loadBook", relativeTo: FileManager.documentDirectoryURL).appendingPathExtension("json")
-			try jsData.write(to: loadBookURL, options: .atomicWrite)
+			try jsData.write(to: JSONURL, options: .atomic)
 			print("Data Saved")
-			print(loadBookURL)
-		} catch let error {
-			print(error.localizedDescription)
-			print("====")
-//			print(URL(fileURLWithPath: "loadBook", relativeTo: FileManager.documentDirectoryURL).appendingPathExtension("json"))
-			return
-		}
+			print(JSONURL)
+		} catch let error { print(error.localizedDescription) }
 	}
 
-	func loadBooksCacheJSON()-> [Book]? {
-		guard let loadBookURL = Bundle.main.url(forResource: "loadBook", withExtension: "json")
-			else {
-				print("FUCKED UP")
-				return nil
-			}
-		print(loadBookURL)
-		let decoder = JSONDecoder()
-
-		do {
-			let loadBookData = try Data(contentsOf: loadBookURL)
-			let loadBook = try decoder.decode(Library.self, from: loadBookData)
-			return loadBook.booksCache
-		} catch let error {
-			print(error.localizedDescription)
-			print(loadBookURL)
-			return nil
+	func loadBooksCacheJSON() {
+		guard FileManager.default.fileExists(atPath: JSONURL.path) else {
+		  return
 		}
+		//let urll = Bundle.main.url(forResource: "loadBook", withExtension: "json")
+		let decoder = JSONDecoder()
+		do {
+			let loadBookData = try Data(contentsOf: JSONURL)
+			booksCache = try decoder.decode([Book].self, from: loadBookData)
+		} catch let error { print(error.localizedDescription) }
 	}
 }
 
