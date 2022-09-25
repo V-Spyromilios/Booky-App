@@ -7,18 +7,9 @@
 
 import Foundation
 
-func loadJSON()-> [Book]? {
-	guard let loadBookURL = Bundle.main.url(forResource: "loadBook", withExtension: "json")
-	else {
-		print("FUCKED UP")
-		return nil
+extension FileManager {
+	static var documentDirectoryURL: URL {
+		`default`.urls(for: .documentDirectory, in: .userDomainMask)[0]
 	}
+}
 
-	let decoder = JSONDecoder()
-	do {
-		let loadBookData = try Data(contentsOf: loadBookURL)
-		let loadBook = try decoder.decode(Library.self, from: loadBookData)
-		print(loadBook.booksCache[0].author)
-		return loadBook.booksCache
-		} catch let error { print(error.localizedDescription) }
-	return nil }

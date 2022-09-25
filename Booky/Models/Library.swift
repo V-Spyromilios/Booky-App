@@ -17,26 +17,27 @@ enum Section: CaseIterable, Codable {
 class Library: ObservableObject {
 	var sortedBooks: [Section: [Book]] {
 		get {
-		let groupedBooks = Dictionary(grouping: booksCache, by: \.readMe)
-		return Dictionary(uniqueKeysWithValues: groupedBooks.map {
-			(($0.key ? .unread : .finished), $0.value)
-		})
+			let groupedBooks = Dictionary(grouping: booksCache, by: \.readMe)
+			return Dictionary(uniqueKeysWithValues: groupedBooks.map {
+				(($0.key ? .unread : .finished), $0.value)
+			})
 		}
 		set { //TODO: Check this
 			booksCache = newValue
 				.sorted{ $1.key == .finished }
 				.flatMap({ $0.value })
 		}
-}
-
+	}
+	
 	/// Adds a new book at the start of the booksCache
 	func addNewBook(book: Book, image: Image?) {
 		booksCache.insert(book, at: 0)
+		//self.saveBooksCacheJSON()
 		images[book] = image
 		sortBooks()
 	}
-
-/// Deletes book directly from 'booksCache' and its image from 'images' Dictionary
+	
+	/// Deletes book directly from 'booksCache' and its image from 'images' Dictionary
 	func deleteBook(book: Book) {
 		if let index = booksCache.firstIndex(of: book) {
 			if images[book] != nil {
@@ -47,20 +48,20 @@ class Library: ObservableObject {
 		} else { return }
 	}
 	
-// /// Alternative func to deleteBook :
-//	func delBook(atoffSets offsets: IndexSet, section: Section) {
-//		let booksBeforeDeletion = booksCache
-//
-//		sortedBooks[section]?.remove(atOffsets: offsets)
-//
-//		for change in booksCache.difference(from: booksBeforeDeletion) {
-//			if case .remove(_, let deletedBook, _) = change {
-//				images[deletedBook] = nil
-//			}
-//		}
-//	}
-
-//TODO: Add description
+	// /// Alternative func to deleteBook :
+	//	func delBook(atoffSets offsets: IndexSet, section: Section) {
+	//		let booksBeforeDeletion = booksCache
+	//
+	//		sortedBooks[section]?.remove(atOffsets: offsets)
+	//
+	//		for change in booksCache.difference(from: booksBeforeDeletion) {
+	//			if case .remove(_, let deletedBook, _) = change {
+	//				images[deletedBook] = nil
+	//			}
+	//		}
+	//	}
+	
+	//TODO: Add description
 	func sortBooks() {
 		booksCache = sortedBooks
 			.sorted{ $1.key == .finished }
@@ -68,8 +69,8 @@ class Library: ObservableObject {
 			.sorted(by: <)
 		objectWillChange.send()
 	}
-
-///move book from oldOffSets: IndexSet to newOffset: Int, withing the given section: Section
+	
+	///move book from oldOffSets: IndexSet to newOffset: Int, withing the given section: Section
 	func moveBook(oldOffSets: IndexSet, newOffset: Int, section: Section) {
 		sortedBooks[section]?.move(fromOffsets: oldOffSets, toOffset: newOffset)
 	}
@@ -78,48 +79,93 @@ class Library: ObservableObject {
 	required init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: CodingKeys.self)
 		booksCache = try values.decode([Book].self, forKey: .booksCache)
-		//images = try values.decode(images.self, forKey: .images)
 	}
 
 
 	func encode(to encoder: Encoder) throws {
 		var container = encoder.container(keyedBy: CodingKeys.self)
 		try container.encode(booksCache, forKey: .booksCache)
-		//try container.encode(images, forKey: .images)
-	}
-	
-public	init() {
-	self.booksCache = loadJSON() ?? [Book.init()]
 	}
 
-///in-memory cache of the manualy shorted book
-@Published var booksCache: [Book] = [
-//	.init(title: "Working with SwiftUI", author: "Prince of BellAir", date: Date()),
-//	.init(title: "Zero to One", author: "Peter Thiel", date: Date()),
-//	.init(title: "LiftOff", author: "Eric Berger", date: Date()),
-//	.init(title: "Space and Gravity", author: 	"Emma Clemens", date: Date()),
-//	.init(title: "Develop in Swift", author: "Apple", date: Date()),
-//	.init(title: "the Secret of Our Success", author: "Joseph Hendrich", date: Date()),
-//	.init(title: "Καραμανλής", author: "Σωτήρης Ριζάς", date: Date()),
-//	.init(title: "The Mision", author: "David W. Brown", date: Date()),
-//	.init(title: "Ο Πελλοπονησιακός Πόλεμος", author: "Donald Kagan", date: Date()),
-//	.init(title: "Astrophysics in a Nutshell", author: "Dan Maoz", date: Date()),
-//	.init(title: "Η Ελλάδα, οι Ηνωμένες Πολιτείες και η Ευρώπη 1961-1964", author: "Σωτήρης Ριζάς", date: Date()),
-//	.init(title: "Ελλάδα 1453-1821", author: "David Brewer", date: Date()),
-//	.init(title: "Ενα σκοτεινό δωμάτιο, 1967-1974", author: "Παπαχελάς Αλέξης", date: Date()),
-//	.init(title: "1821 - Από την επανάσταση στο κράτος", author: "Κωνσταντίνα Μπότσιου", date: Date()),
-//	.init(title: "Η Αθήνα τον 19ο αιώνα", author: "Θανάσης Γιοχάλας", date: Date()),
-//	.init(title: "Aναζητώντας το αόρατο Σύμπαν", author: "David Elbaz", date: Date()),
-	
-]
+	public	init() {
+		self.booksCache = loadBooksCacheJSON() ?? [Book.init()]
+	}
 
-@Published var images: [Book: Image] = [:]
+	///in-memory cache of the manualy shorted book
+	@Published var booksCache: [Book] = [
+		//	.init(title: "Working with SwiftUI", author: "Prince of BellAir", date: Date()),
+		//	.init(title: "Zero to One", author: "Peter Thiel", date: Date()),
+		//	.init(title: "LiftOff", author: "Eric Berger", date: Date()),
+		//	.init(title: "Space and Gravity", author: 	"Emma Clemens", date: Date()),
+		//	.init(title: "Develop in Swift", author: "Apple", date: Date()),
+		//	.init(title: "the Secret of Our Success", author: "Joseph Hendrich", date: Date()),
+		//	.init(title: "Καραμανλής", author: "Σωτήρης Ριζάς", date: Date()),
+		//	.init(title: "The Mision", author: "David W. Brown", date: Date()),
+		//	.init(title: "Ο Πελλοπονησιακός Πόλεμος", author: "Donald Kagan", date: Date()),
+		//	.init(title: "Astrophysics in a Nutshell", author: "Dan Maoz", date: Date()),
+		//	.init(title: "Η Ελλάδα, οι Ηνωμένες Πολιτείες και η Ευρώπη 1961-1964", author: "Σωτήρης Ριζάς", date: Date()),
+		//	.init(title: "Ελλάδα 1453-1821", author: "David Brewer", date: Date()),
+		//	.init(title: "Ενα σκοτεινό δωμάτιο, 1967-1974", author: "Παπαχελάς Αλέξης", date: Date()),
+		//	.init(title: "1821 - Από την επανάσταση στο κράτος", author: "Κωνσταντίνα Μπότσιου", date: Date()),
+		//	.init(title: "Η Αθήνα τον 19ο αιώνα", author: "Θανάσης Γιοχάλας", date: Date()),
+		//	.init(title: "Aναζητώντας το αόρατο Σύμπαν", author: "David Elbaz", date: Date()),
+		
+	] {
+		didSet {
+			self.saveBooksCacheJSON()
+		}
+	}
+
+	@Published var images: [Book: Image] = [:]
+
+	func saveBooksCacheJSON() {
+		guard let loadBookURL = Bundle.main.url(forResource: "loadBook", withExtension: "json")
+			else {
+				print("FUCKED UP")
+				return
+			}
+		let encoder = JSONEncoder()
+
+		do {
+			let jsData = try encoder.encode(self.booksCache)
+//			let ioURL = URL(fileURLWithPath: "loadBook", relativeTo: FileManager.documentDirectoryURL).appendingPathExtension("json")
+			try jsData.write(to: loadBookURL, options: .atomicWrite)
+			print("Data Saved")
+			print(loadBookURL)
+		} catch let error {
+			print(error.localizedDescription)
+			print("====")
+//			print(URL(fileURLWithPath: "loadBook", relativeTo: FileManager.documentDirectoryURL).appendingPathExtension("json"))
+			return
+		}
+	}
+
+	func loadBooksCacheJSON()-> [Book]? {
+		guard let loadBookURL = Bundle.main.url(forResource: "loadBook", withExtension: "json")
+			else {
+				print("FUCKED UP")
+				return nil
+			}
+		print(loadBookURL)
+		let decoder = JSONDecoder()
+
+		do {
+			let loadBookData = try Data(contentsOf: loadBookURL)
+			let loadBook = try decoder.decode(Library.self, from: loadBookData)
+			return loadBook.booksCache
+		} catch let error {
+			print(error.localizedDescription)
+			print(loadBookURL)
+			return nil
+		}
+	}
 }
 
 extension Library: Codable {
 	enum CodingKeys: String, CodingKey {
 
 		case booksCache
-		//case images
+		case images
 	}
 }
+

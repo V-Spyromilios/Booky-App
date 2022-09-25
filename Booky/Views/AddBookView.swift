@@ -13,7 +13,7 @@ struct AddBookView: View {
 @FocusState private var titleIsFocused: Bool
 @FocusState private var authorIsFocused: Bool
 @FocusState private var reviewIsFocused: Bool
-@ObservedObject var book = Book(title: "", author: "")
+@ObservedObject var book = Book(title: "", author: "", date: Date())
 @State var image: Image? = nil
 
 var body: some View {

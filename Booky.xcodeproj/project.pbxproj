@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EF318D8128E05610002D2C05 /* LibraryImageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF318D8028E05610002D2C05 /* LibraryImageModel.swift */; };
 		EF3559EE28D08A8300A012C9 /* BookyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3559ED28D08A8300A012C9 /* BookyApp.swift */; };
 		EF3559F028D08A8300A012C9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3559EF28D08A8300A012C9 /* ContentView.swift */; };
 		EF3559F228D08A8300A012C9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EF3559F128D08A8300A012C9 /* Assets.xcassets */; };
@@ -24,6 +25,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		EF318D8028E05610002D2C05 /* LibraryImageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryImageModel.swift; sourceTree = "<group>"; };
 		EF3559EA28D08A8300A012C9 /* Booky.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Booky.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF3559ED28D08A8300A012C9 /* BookyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookyApp.swift; sourceTree = "<group>"; };
 		EF3559EF28D08A8300A012C9 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -107,6 +109,7 @@
 				EF3559FD28D08B0800A012C9 /* BookModel.swift */,
 				EF3559FF28D08B2D00A012C9 /* PHPicker.swift */,
 				EFEDDF0828D9DBC100CB5C10 /* DiskOps.swift */,
+				EF318D8028E05610002D2C05 /* LibraryImageModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -197,6 +200,7 @@
 				EF355A0928D08C9F00A012C9 /* AddBookView.swift in Sources */,
 				EF3559FC28D08ACC00A012C9 /* Library.swift in Sources */,
 				EF355A0728D08C8200A012C9 /* DetailedView.swift in Sources */,
+				EF318D8128E05610002D2C05 /* LibraryImageModel.swift in Sources */,
 				EF355A0028D08B2D00A012C9 /* PHPicker.swift in Sources */,
 				EFEDDF0C28D9F5B600CB5C10 /* loadBook.json in Sources */,
 				EF355A0B28D08CC100A012C9 /* BookImageView.swift in Sources */,
